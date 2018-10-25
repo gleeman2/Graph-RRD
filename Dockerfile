@@ -1,6 +1,8 @@
 #!/usr/bin/docker build .
+# -- Stor2rrd/Lapr2rrd/Grafana/Grphite --
+# http://docs.grafana.org/installation/debian/ < grafana
 #
-# VERSION               1.0
+# VERSION        1.0
 
 FROM       debian:jessie
 MAINTAINER jirka@dutka.net (xorux/apps)
@@ -39,7 +41,18 @@ RUN apt-get install -yq \
     vim \
     rsyslog \
     sudo \
+    curl \
+    graphite-carbon \
+    adduser \
+    libfontconfig
     less
+
+# Install APT Grafana
+# RUN echo "deb https://packagecloud.io/grafana/stable/debian/ stretch main" >> /etc/apt/sources.list
+# RUN echo "deb https://packagecloud.io/grafana/testing/debian/ stretch main" >> /etc/apt/sources.list
+# curl https://packagecloud.io/gpg.key | sudo apt-key add -
+# RUN apt-get update
+# RUN apt-get install grafana
 
 # Cleanup
 RUN apt-get clean
@@ -87,7 +100,7 @@ WORKDIR /home/stor2rrd
 RUN tar xvf stor2rrd-$STOR_VER.tar
 
 # expose ports for SSH, HTTP, HTTPS and LPAR2RRD daemon
-EXPOSE 22 80 443 8162
+EXPOSE 22 80 443 8162 8080 8081
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
@@ -99,5 +112,9 @@ RUN chmod +x /startup.sh
 COPY tz.pl /usr/lib/cgi-bin/tz.pl
 RUN chmod +x /usr/lib/cgi-bin/tz.pl
 COPY index.html /var/www/
+
+# Startup Grafana :3000
+# RUN service grafana-server start
+# RUN update-rc.d grafana-server defaults
 
 ENTRYPOINT [ "/startup.sh" ]
