@@ -1,4 +1,4 @@
-## Graph from RRD
+# Graph from RRD
 
 **Story:**
 
@@ -44,28 +44,48 @@ Cisco MDS SAN switches
 Cisco Nexus switches
 QLogic
 
+**Grafana**
 
+![alt text](https://github.com/gleeman2/Graph-RRD/Graph-RRD.pdf)
+
+
+**Lessons Leaned**
+- Password for user(_lpar2rrd_) polling the array:
+
+ _$ cd /home/stor2rrd/stor2rrd_
+ _$ perl bin/spasswd.pl_
+
+    _Encode password for storage authentication:_
+    _-------------------------------------------_
+    _Enter password:_
+    _Re-enter password:_
+
+    _Copy the following string to the password field of the corresponding line in etc/storage-list.cfg:_
+
+    _KT4mXVI9N0BUPjZdVQo=_
+-
 
 **Install and Configure the Environment**
 
 The following needs to be in place
 1. Install docker.
 2. Pull down GraphRRD
-3. Run GraphRRD docker image (docker run -d -p 8080:80 graph-rrd)
+3. Run GraphRRD docker image (_docker run -d -p 8080:80 -p 8081:8081 -p 3000:3000 graph-rrd/apps_)
 4. Connect to image http://localhost:8080
 
 
-**XoruX Docker Image**
+
+**XoruX/Grafana Docker Image**
 
 Git repo of the Docker image for XoruX applications - LPAR2RRD & STOR2RRD.
 
 This docker image is based on official Debian 9 (Strech) with all necessary dependencies installed.
 
 Quick start:
-#docker pull graph-rrd/apps
-#docker run -d -p 8080:80 -p 8081:8081 -p 3000:3000 graph-rrd/apps
+_#docker pull graph-rrd/apps_
+_#docker run -d -p 8080:80 -p 8081:8081 -p 3000:3000 graph-rrd/apps_
 - web GUI on http://localhost:8080
 - set timezone for running container
 - continue to LPAR2RRD and use admin/admin as username/password
 - or continue to STOR2RRD and use admin/admin as username/password
-- or continue to Grafan on port 3000 and use admin/admin as username/password
+- or continue to Grafana on port 3000 and use admin/admin as username/password
