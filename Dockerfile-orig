@@ -4,7 +4,7 @@
 #
 # VERSION        1.0
 
-FROM       debian:jessie
+FROM       debian:stretch
 MAINTAINER jirka@dutka.net (xorux/apps)
 
 ENV HOSTNAME GraphRRD
@@ -14,10 +14,10 @@ ENV DEBIAN_FRONTEND noninteractive
 # create file to see if this is the firstrun when started
 RUN touch /firstrun
 # add non-free debian sources
-RUN echo "deb http://ftp.debian.org/debian jessie main non-free" >> /etc/apt/sources.list
+RUN echo "deb http://ftp.debian.org/debian stretch main non-free" >> /etc/apt/sources.list
 
 # Install APT Grafana
-# RUN echo 'deb http://packagecloud.io/grafana/stable/debian/ jessie main' >> /etc/apt/sources.list
+# RUN echo 'deb http://packagecloud.io/grafana/stable/debian/ stretch main' >> /etc/apt/sources.list
 # RUN echo 'deb https://packagecloud.io/grafana/testing/debian/ stretch main' >> /etc/apt/sources.list
 # RUN curl https://packagecloud.io/gpg.key | sudo apt-key add -
 

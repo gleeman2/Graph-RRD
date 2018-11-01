@@ -11,7 +11,7 @@ Criteria to meet:
 5. Nice to have - Low maintenance and easy to use/configure
 6. Nice to have – Support(paid or free) from vendor to modify pull scripts or add new arrays.
 
-There was no one app out there to full all the criteria, but we came close anough with using stor2rrd, Grafana and Graphite. The rest of the readme covers the lessosn learned and the end results that is my current working solution.
+There was no one app out there to full all the criteria, but we came close anough with using stor2rrd, Grafana and Graphite. The rest of the readme covers the lessosn learned and the end results that is my current working solution. This document will be focused around INFINIDAT.
 
 
 
@@ -45,16 +45,27 @@ Cisco Nexus switches
 QLogic
 
 
+
+**Install and Configure the Environment**
+
+The following needs to be in place
+1. Install docker.
+2. Pull down GraphRRD
+3. Run GraphRRD docker image (docker run -d -p 8080:80 graph-rrd)
+4. Connect to image http://localhost:8080
+
+
 **XoruX Docker Image**
 
 Git repo of the Docker image for XoruX applications - LPAR2RRD & STOR2RRD.
 
-This docker image is based on official Debian 8 (Jessie) with all necessary dependencies installed.
+This docker image is based on official Debian 9 (Strech) with all necessary dependencies installed.
 
 Quick start:
-#docker pull xorux/apps
-#docker run -d -p 8080:80 xorux/apps
+#docker pull graph-rrd/apps
+#docker run -d -p 8080:80 -p 8081:8081 -p 3000:3000 graph-rrd/apps
 - web GUI on http://localhost:8080
 - set timezone for running container
 - continue to LPAR2RRD and use admin/admin as username/password
 - or continue to STOR2RRD and use admin/admin as username/password
+- or continue to Grafan on port 3000 and use admin/admin as username/password
