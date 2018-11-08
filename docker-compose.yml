@@ -1,0 +1,19 @@
+version: '3'
+services:
+  xorux:
+    image: gleeman2/graph_rrd
+    ports:
+      - "8080:80"
+    volumes:
+      - ./rrddata:/home/lpar2rrd/stor2rrd/data
+  graphite:
+     image: gleeman2/graph_graf
+     ports:
+       - "8081:80"
+       - "2003-2004:2003-2004"
+       - "2023-2024:2023-2024"
+       - "8125:8125/udp"
+       - "8126:8126"
+       - "3000:3000"
+     volumes:
+       - ./rrddata:/opt/graphite/storage/whisper/rrd

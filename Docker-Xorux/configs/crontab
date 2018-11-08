@@ -1,0 +1,41 @@
+#  LPAR2RRD
+######################################################
+
+# GUI
+*/30 * * * * /home/lpar2rrd/lpar2rrd/load.sh > /home/lpar2rrd/lpar2rrd/logs/load.out 2>&1
+
+# HMC agent (it collects HMC utilization itself : CPU/Mem/paging)
+*/5 * * * * . /home/lpar2rrd/lpar2rrd/etc/lpar2rrd.cfg; /usr/bin/perl /opt/lpar2rrd-agent/lpar2rrd-agent.pl -c localhost > /var/tmp/lpar2rrd-agent-hmc.out 2>/var/tmp/lpar2rrd-agent-hmc.err
+
+# Alerting - HMC data source
+*/10 * * * * /home/lpar2rrd/lpar2rrd/load_alert.sh > /home/lpar2rrd/lpar2rrd/load_alert.out 2>&1
+
+#  STOR2RRD
+######################################################
+
+# GUI
+03,23,43 * * * * /home/lpar2rrd/stor2rrd/load.sh > /home/lpar2rrd/stor2rrd/logs/load.out 2>&1
+
+# Dell EMC Isilon
+#*/10 * * * * /opt/stor2rrd/load_isilonperf.sh > /opt/stor2rrd/load_isilonperf.out 2>&1
+
+# Dell EMC XtremIO
+#*/8 * * * * /opt/stor2rrd/load_xtremioperf.sh > /opt/stor2rrd/load_xtremioperf.out 2>&1
+
+#Infinibox Storage agent
+*/5 * * * * /opt/stor2rrd/load_infiniboxperf.sh > /opt/stor2rrd/load_infiniboxperf.out 2>&1
+
+# EMC DataDomain storage agent
+*/5 * * * * /opt/stor2rrd/load_datadomainperf.sh > /opt/stor2rrd/load_datadomainperf.out 2>&1
+
+# VMAX storage agent
+#*/10 * * * * /opt/stor2rrd/load_vmaxperf.sh > /opt/stor2rrd/load_vmaxperf.out 2>&1
+
+# IBM XIV storage agent
+#*/10 * * * * /home/lpar2rrd/stor2rrd/load_xivperf.sh > /home/lpar2rrd/stor2rrd/load_xivperf.out 2>&1
+
+# NetApp storage agent
+#*/5 * * * * /home/lpar2rrd/stor2rrd/load_netappperf.sh > /home/lpar2rrd/stor2rrd/load_netappperf.out 2>&1
+
+# SAN agent (Brocade + Cisco + QLogic)
+*/10 * * * * /opt/stor2rrd/load_sanperf.sh >/opt/stor2rrd/logs/load_sanperf.out 2>&1
