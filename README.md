@@ -15,7 +15,7 @@ There was no one app out there to fill all the criteria, but we came close anoug
 
 
 
-__**STOR2RRD**__
+**STOR2RRD**
 
 The product actually supports these storages arrays:
 ```
@@ -47,18 +47,16 @@ Cisco MDS SAN switches
 Cisco Nexus switches
 QLogic
 ```
+![Stro2RRD](https://github.com/gleeman2/Graph-RRD/blob/master/Stor2rrd-Dashboard.png "Stor2rRD Dashboard example")
 
 
-
-__**Grafana**__
+**Grafana**
 
 Grafana is a better graphical tool to represent the data captured by Stor2rrd. Grafana cannot directly read RRD databases, but Graphite can and as it happens Grafana can read from Graphite and whola, we have graphs.
 
 ![Grafana](https://github.com/gleeman2/Graph-RRD/blob/master/Graph-RRD.png "Grafana Dashboard example")
 
-
-
-__**Putting it together**__
+**Putting it together**
 
 A lot of work has already been done on the indiviual packages, so not to reinvent the wheel, we went the docker way and used pre confgured images.
 
@@ -96,17 +94,19 @@ A lot of work has already been done on the indiviual packages, so not to reinven
 
 
 
-__**Lets Use it!**__
+**Lets Use it!**
 
 1. Login to http://localhost:8080/stor2rrd
-  -
+  - Configure Alerts/reports
+  - Create Dashboards
 2. Login to http://localhost:3000
+  - Create Dashboards
 3.
 
 
 
 
-__**Lessons Learned**__
+**Lessons Learned**
 
 - Not to reinvent the wheel and use what has already been proved stable.
 - Password for user(_lpar2rrd_) polling the array:
@@ -132,19 +132,8 @@ __**Lessons Learned**__
 
 
 
-__**XoruX/Grafana Docker and GitHub Image**__
+**XoruX/Grafana Docker and GitHub Image**
 
 Git repo of the Docker image for XoruX applications - LPAR2RRD & STOR2RRD.(https://github.com/gleeman2/Graph-RRD)
-
 This docker image is based on official Debian 8 (jessie) with all necessary dependencies installed.
-
 Using images from graphite-project/docker-graphite-statsd forked from hopsoft/docker-graphite-statsd
-
-Quick start:
-_#docker-compose up -d_
-- web GUI on http://localhost/stor2rrd
-- set timezone for running container
-- continue to LPAR2RRD and use admin/admin as username/password
-- or continue to STOR2RRD and use admin/admin as username/password
-- or continue to Graphite http://localhost:8081
-- or continue to Grafana on port http://localhost:3000 and use admin/admin as username/password
