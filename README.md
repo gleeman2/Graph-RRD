@@ -11,7 +11,7 @@ Criteria to meet:
 5. Nice to have - Low maintenance and easy to use/configure
 6. Nice to have – Support(paid or free) from vendor to modify pull scripts or add new arrays.
 
-There was no one app out there to fill all the criteria, but we came close anough with using stor2rrd, Grafana and Graphite. The rest of the readme covers the lessosn learned and the end results that is my current working solution. This document will be focused around INFINIDAT.
+There was no one app out there to fill all the criteria, but we came close anough with using stor2rrd, Grafana and Graphite. The rest of the readme covers the lessosn learned and the end results that is my current working solution. This document will be focused around INFINIDAT monitoring, reporting and alerting.
 
 
 
@@ -50,7 +50,7 @@ QLogic
 
 Grafana is a better graphical tool to represent the data captured by Stor2rrd. Grafana cannot directly read RRD databases, but Graphite can and as it happens Grafana can read from Graphite and whola, we have graphs.
 
-![alt text](https://github.com/gleeman2/Graph-RRD/Graph-RRD.pdf)
+![alt text](https://github.com/gleeman2/Graph-RRD/Graph-RRD.png)
 
 
 
@@ -73,7 +73,6 @@ A lot of work has already been done on the indiviual packages, so not to reinven
   - Persistent volumes are located at _./rrddata_ and _./rrdetc_ on local system (it contains the RRD and etc files)
 4. Stor2rrd setup
   - Follow instructions from http://www.stor2rrd.com/INFINIDAT-Infinibox-monitoring.htm
-  -
   - Create encrypted stor2rrd password
     - $ cd /home/stor2rrd/stor2rrd
     - $ perl bin/spasswd.pl
@@ -91,12 +90,14 @@ A lot of work has already been done on the indiviual packages, so not to reinven
     - Select "Save & Test"
 
 
-**Using it**
+
+**Lets Use it!**
 
 1. Login to http://localhost:8080/stor2rrd
   -
 2. Login to http://localhost:3000
 3.
+
 
 
 **Lessons Learned**
