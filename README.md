@@ -1,6 +1,6 @@
 # Graph from RRD
 
-**Story:**
+__**Story:**__
 
 We were looking for a "first look" troubleshooting/monitoring tool to cover our multivendor storage environment.
 Criteria to meet:
@@ -15,9 +15,10 @@ There was no one app out there to fill all the criteria, but we came close anoug
 
 
 
-**STOR2RRD**
+__**STOR2RRD**__
 
 The product actually supports these storages arrays:
+```
 INFINIDAT InfiniBox
 IBM
 Hitachi
@@ -36,17 +37,20 @@ Quantum StorNext
 Dot Hill/Seagate AssuredSAN
 LSI / Engenio based storages
 DataCore SANSymphony
+```
 
 The product supports SAN monitoring:
+```
 Brocade SAN switches and all their re-brands
 Brocade Network Advisor
 Cisco MDS SAN switches
 Cisco Nexus switches
 QLogic
+```
 
 
 
-**Grafana**
+__**Grafana**__
 
 Grafana is a better graphical tool to represent the data captured by Stor2rrd. Grafana cannot directly read RRD databases, but Graphite can and as it happens Grafana can read from Graphite and whola, we have graphs.
 
@@ -54,7 +58,7 @@ Grafana is a better graphical tool to represent the data captured by Stor2rrd. G
 
 
 
-**Putting it together**
+__**Putting it together**__
 
 A lot of work has already been done on the indiviual packages, so not to reinvent the wheel, we went the docker way and used pre confgured images.
 
@@ -91,7 +95,8 @@ A lot of work has already been done on the indiviual packages, so not to reinven
 
 
 
-**Lets Use it!**
+
+__**Lets Use it!**__
 
 1. Login to http://localhost:8080/stor2rrd
   -
@@ -100,7 +105,8 @@ A lot of work has already been done on the indiviual packages, so not to reinven
 
 
 
-**Lessons Learned**
+
+__**Lessons Learned**__
 
 - Not to reinvent the wheel and use what has already been proved stable.
 - Password for user(_lpar2rrd_) polling the array:
@@ -122,13 +128,11 @@ A lot of work has already been done on the indiviual packages, so not to reinven
 - Symlinks for Stor2rrd to Graphite to Grapana
  Grafana has to read from Graphite and Graphite is rading from the stor2rrd RRD database at /home/stor2rrd/stor2rrd/data
 
-4. Connect to image http://localhost:8080
 
 
 
 
-
-**XoruX/Grafana Docker and GitHub Image**
+__**XoruX/Grafana Docker and GitHub Image**__
 
 Git repo of the Docker image for XoruX applications - LPAR2RRD & STOR2RRD.(https://github.com/gleeman2/Graph-RRD)
 
