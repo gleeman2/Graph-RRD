@@ -50,7 +50,7 @@ QLogic
 
 Grafana is a better graphical tool to represent the data captured by Stor2rrd. Grafana cannot directly read RRD databases, but Graphite can and as it happens Grafana can read from Graphite and whola, we have graphs.
 
-![alt text](https://github.com/gleeman2/Graph-RRD/Graph-RRD.png)
+![Grafana](https://github.com/gleeman2/Graph-RRD/blob/master/Graph-RRD.png "Grafana Dashboard example")
 
 
 
