@@ -11,7 +11,7 @@ Criteria to meet:
 5. Nice to have - Low maintenance and easy to use/configure
 6. Nice to have – Support(paid or free) from vendor to modify pull scripts or add new arrays.
 
-There was no one app out there to full all the criteria, but we came close anough with using stor2rrd, Grafana and Graphite. The rest of the readme covers the lessosn learned and the end results that is my current working solution. This document will be focused around INFINIDAT.
+There was no one app out there to fill all the criteria, but we came close anough with using stor2rrd, Grafana and Graphite. The rest of the readme covers the lessosn learned and the end results that is my current working solution. This document will be focused around INFINIDAT.
 
 
 
@@ -44,20 +44,62 @@ Cisco MDS SAN switches
 Cisco Nexus switches
 QLogic
 
+
+
 **Grafana**
+
+Grafana is a better graphical tool to represent the data captured by Stor2rrd. Grafana cannot directly read RRD databases, but Graphite can and as it happens Grafana can read from Graphite and whola, we have graphs.
 
 ![alt text](https://github.com/gleeman2/Graph-RRD/Graph-RRD.pdf)
 
 
+
 **Putting it together**
 
-A lot of work has already been done on the indevisital packages, so not to reinvent the wheel, we went the docker way and use pre confgured images.
+A lot of work has already been done on the indiviual packages, so not to reinvent the wheel, we went the docker way and used pre confgured images.
 
 1. Get docker up and running. Make sure that docker-compose are part of your install.
+  - Here is how to intall it on Ubuntu 18.x https://computingforgeeks.com/installing-docker-ce-ubuntu-debian-fedora-arch-centos/
 2. Git the compose file and relevent configuration files from https://github.com/gleeman2/Graph-RRD/ by either cloning (git https://github.com/gleeman2/Graph-RRD.git) or download the zip file.
-3. To start the containers run _#docker-compose up -d_ in the folder the docker-compose.yml is located.
+  - See " Cloning and Existing Repository" at https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository
+  - Create new direcorty and cd into it.
+  - Run "_git clone https://github.com/gleeman2/Graph-RRD.git_"
+3. To start the containers run _#docker-compose up -d_ in the folder the docker-compose.yml file is located.
+  - web GUI on http://localhost:8080
+    - set timezone for running container
+  - continue to STOR2RRD http://localhost:8080/stor2rrd and use admin/admin as username/password
+  - or continue to Graphite http://localhost:8081
+  - or continue to Grafana on port http://localhost:3000 and use admin/admin as username/password
+  - Persistent volumes are located at _./rrddata_ and _./rrdetc_ on local system (it contains the RRD and etc files)
+4. Stor2rrd setup
+  - Follow instructions from http://www.stor2rrd.com/INFINIDAT-Infinibox-monitoring.htm
+  -
+  - Create encrypted stor2rrd password
+    - $ cd /home/stor2rrd/stor2rrd
+    - $ perl bin/spasswd.pl
+  - example of Infinibox entryin etc files (etc file is stored at _/home/stor2rrd/stor2rrd/etc/storage-config.cfg_)
+    - _Infinibox_2990:INFINIBOX:192.168.0.11:stor2rrd:KT4mXVIssss0BUPjZdVQo=_
+  - Check new config:
+    - $ cd /home/stor2rrd/stor2rrd
+    - $ ./bin/config_check.sh Infinibox_2990
+4. Grafana setup.
+  - Login http://localhost:3000 and use admin/admin
+  - Goto Configuration/Data sources
+    - Name = Stor2RRD
+    - URL = http://localhost:8080
+    - Access = Server
+    - Select "Save & Test"
 
-**Lessons Leaned**
+
+**Using it**
+
+1. Login to http://localhost:8080/stor2rrd
+  -
+2. Login to http://localhost:3000
+3.
+
+
+**Lessons Learned**
 
 - Not to reinvent the wheel and use what has already been proved stable.
 - Password for user(_lpar2rrd_) polling the array:
@@ -79,14 +121,9 @@ A lot of work has already been done on the indevisital packages, so not to reinv
 - Symlinks for Stor2rrd to Graphite to Grapana
  Grafana has to read from Graphite and Graphite is rading from the stor2rrd RRD database at /home/stor2rrd/stor2rrd/data
 
-
-**Install and Configure the Environment**
-
-The following needs to be in place
-1. Install docker.
-2. Pull down GraphRRD
-3. Run GraphRRD docker image (_docker run -d -p 8080:80 -p 8081:8081 -p 3000:3000 graph-rrd/apps_)
 4. Connect to image http://localhost:8080
+
+
 
 
 

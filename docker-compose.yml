@@ -6,6 +6,7 @@ services:
       - "8080:80"
     volumes:
       - ./rrddata:/home/lpar2rrd/stor2rrd/data
+      - ./rrdetc:/home/lpar2rrd/stor2rrd/etc
   graphite:
      image: gleeman2/graph_graf
      ports:
