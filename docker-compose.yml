@@ -4,6 +4,7 @@ services:
     image: gleeman2/graph_rrd
     ports:
       - "8080:80"
+      - "22:22"
     volumes:
       - ./rrddata:/home/lpar2rrd/stor2rrd/data
       - ./rrdetc:/home/lpar2rrd/stor2rrd/etc
