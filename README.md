@@ -105,7 +105,6 @@ A lot of work has already been done on the indiviual packages, so not to reinven
 
 
 
-
 **Lessons Learned**
 
 - Not to reinvent the wheel and use what has already been proved stable.
